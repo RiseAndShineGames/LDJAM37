@@ -7,17 +7,18 @@ export default class extends Phaser.Sprite {
 
     this.game = game;
     this.anchor.setTo(0.5);
+    this.scale.set(3);
     this.game.physics.arcade.enable(this);
     this.movespeed = 100;
 
     this.animations.add('idle-up', [0],10,true);
-    this.animations.add('walk-up', [1,2],5,true);
+    this.animations.add('walk-up', [0,1,0,2],5,true);
     this.animations.add('idle-left', [3],10,true);
-    this.animations.add('walk-left', [4,5],5,true);
+    this.animations.add('walk-left', [3,4,3,5],5,true);
     this.animations.add('idle-down', [6],10,true);
-    this.animations.add('walk-down', [7,8],5,true);
+    this.animations.add('walk-down', [6,7,6,8],5,true);
     this.animations.add('idle-right', [9],10,true);
-    this.animations.add('walk-right', [10,11],5,true);
+    this.animations.add('walk-right', [9,10,9,11],5,true);
     this.animations.play('idle-right');
 
     this.cursors = this.game.input.keyboard.addKeys({
@@ -40,7 +41,7 @@ export default class extends Phaser.Sprite {
       this.body.velocity.y = -this.movespeed;
       this.body.velocity.x = 0;
       this.animations.play('walk-up');
-      
+
     }
     else if (this.cursors.down.isDown || this.cursors.down_alt.isDown && !(this.cursors.up.isDown || this.cursors.up_alt.isDown)) {
       this.body.velocity.y = +this.movespeed;

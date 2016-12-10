@@ -5,6 +5,7 @@ export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
+        this.game.add.sprite(0,0, "room");
         this.player = new Player({
             game: this.game,
             x: this.game.width * 0.5,
