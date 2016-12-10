@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import SingleShot from '../weapons/SingleShot';
 import SpreadShot from '../weapons/SpreadShot';
-import Shotgun from '../weapons/Shotgun';
+import TwinCannons from '../weapons/Shotgun';
 import Beam from '../weapons/Beam';
 
 export default class extends Phaser.Sprite {
@@ -13,7 +13,7 @@ export default class extends Phaser.Sprite {
         this.game = game
         this.anchor.setTo(0, 0.5)
         this.speed = 350
-        this.deltaSpeed = 30
+        this.deltaSpeed = 20
         this.currentWeapon = "default"
 
         // Physics and cursors
@@ -31,12 +31,12 @@ export default class extends Phaser.Sprite {
         this.cursors.change.onDown.add(() => {
             switch (this.currentWeapon) {
                 case "default":
+                    this.currentWeapon = "twincannons";
+                    break;
+                case "twincannons":
                     this.currentWeapon = "spreadShot";
                     break;
                 case "spreadShot":
-                    this.currentWeapon = "shotgun";
-                    break;
-                case "shotgun":
                     this.currentWeapon = "beam";
                     break;
                 case "beam":
@@ -49,7 +49,7 @@ export default class extends Phaser.Sprite {
         this.weapons = {
             default: new SingleShot(this.game),
             spreadShot: new SpreadShot(this.game),
-            shotgun: new Shotgun(this.game),
+            twincannons: new TwinCannons(this.game),
             beam: new Beam(this.game),
         }
 

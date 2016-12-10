@@ -6,6 +6,7 @@ export default class extends Weapon  {
     constructor (game) {
         super({ game: game, name: "SpreadShot" });
         this.game = game;
+        this.fireRate = 750;
     }
 
     fire(source) {
