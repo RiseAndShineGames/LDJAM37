@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import SingleShot from '../sprites/SingleShot';
+import SingleShot from '../weapons/SingleShot';
 
 export default class extends Phaser.State {
     init () {}
