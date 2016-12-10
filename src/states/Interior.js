@@ -7,13 +7,16 @@ export default class extends Phaser.State {
     create () {
         this.player = new Player({
             game: this.game,
-            x: 5,
-            y: 5,
+            x: this.game.width * 0.5,
+            y: this.game.height * 0.5,
             asset: 'player'
         });
         this.game.add.existing(this.player);
-        this.player.animations.add('walk', [1,2,3],60,true)
-        this.player.animations.play('walk');
+
+
     }
-    update () {}
+    update () {
+
+
+    }
 }
