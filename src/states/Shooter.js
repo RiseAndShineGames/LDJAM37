@@ -12,7 +12,6 @@ export default class extends Phaser.State {
             asset: 'ship'
         });
         this.game.add.existing(this.ship);
-        this.shoot = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     }
     update () {
     }

@@ -13,8 +13,8 @@ export default class extends Weapon  {
     fire(source) {
         if (this.game.time.time < this.nextFire) { return; }
 
-        let y = source.y;
-        let x = 20;
+        let y = source.position.y;
+        let x = source.position.x + source.width + 10;
 
         this.getFirstExists(false).fire(x, y, -10, this.bulletSpeed, 0, 0);
         this.getFirstExists(false).fire(x, y, -7, this.bulletSpeed, 0, 0);
