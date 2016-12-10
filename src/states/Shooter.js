@@ -5,6 +5,7 @@ export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
+        this.game.add.sprite(0,0, "space");
         this.ship = new Ship({
             game: this.game,
             x: 20,
