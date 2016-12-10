@@ -13,6 +13,7 @@ export default class extends Phaser.Sprite {
         this.game = game
         this.anchor.setTo(0, 0.5)
         this.speed = 350
+        this.deltaSpeed = 30
         this.currentWeapon = "default"
 
         // Physics and cursors
@@ -25,6 +26,8 @@ export default class extends Phaser.Sprite {
             "shoot": Phaser.KeyCode.SPACEBAR,
             "change": Phaser.KeyCode.ENTER
         })
+
+        // Change Weapons
         this.cursors.change.onDown.add(() => {
             switch (this.currentWeapon) {
                 case "default":
@@ -53,11 +56,18 @@ export default class extends Phaser.Sprite {
     }
 
     update () {
-        this.body.velocity.y = 0;
-        if (this.cursors.up.isDown || this.cursors.up_alt.isDown) {
-            this.body.velocity.y = this.speed * -1.0
-        } else if (this.cursors.down.isDown || this.cursors.down_alt.isDown) {
-            this.body.velocity.y = this.speed
+        if ((this.cursors.up.isDown || this.cursors.up_alt.isDown) && this.body.velocity.y > this.speed * -1) {
+            this.body.velocity.y -= this.deltaSpeed;
+        } else if ((this.cursors.down.isDown || this.cursors.down_alt.isDown) && this.body.velocity.y < this.speed) {
+            this.body.velocity.y += this.deltaSpeed;
+        } else {
+            if (this.body.velocity.y < 0) {
+                this.body.velocity.y += this.deltaSpeed;
+            } else if (this.body.velocity.y > 0) {
+                this.body.velocity.y -= this.deltaSpeed;
+            } else {
+                this.body.velocity.y = 0;
+            }
         }
         
         if (this.cursors.shoot.isDown) {
