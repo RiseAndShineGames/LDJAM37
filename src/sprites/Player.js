@@ -40,6 +40,7 @@ export default class extends Phaser.Sprite {
       this.body.velocity.y = -this.movespeed;
       this.body.velocity.x = 0;
       this.animations.play('walk-up');
+      
     }
     else if (this.cursors.down.isDown || this.cursors.down_alt.isDown && !(this.cursors.up.isDown || this.cursors.up_alt.isDown)) {
       this.body.velocity.y = +this.movespeed;
