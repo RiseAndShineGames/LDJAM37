@@ -5,7 +5,8 @@ export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
-        this.game.add.sprite(0,0, "room");
+        this.bg = this.game.add.sprite(0,0, "room");
+        this.bg.scale.setTo(this.game.width/this.bg.width,this.game.height/this.bg.height);
         this.player = new Player({
             game: this.game,
             x: this.game.width * 0.5,
@@ -13,10 +14,11 @@ export default class extends Phaser.State {
             asset: 'player'
         });
         this.game.add.existing(this.player);
-        this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
-            this.state.start('Shooter')
-        });
+
+
     }
     update () {
+
+
     }
 }
