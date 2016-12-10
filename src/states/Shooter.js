@@ -1,19 +1,20 @@
 import Phaser from 'phaser';
-import SingleShot from '../weapons/SingleShot';
-import SpreadShot from '../weapons/SpreadShot';
-import Shotgun from '../weapons/Shotgun';
+import Ship from '../sprites/Ship';
 
 export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
-        this.weapon = new Shotgun(this.game);
+        this.ship = new Ship({
+            game: this.game,
+            x: 20,
+            y: this.game.height * 0.5,
+            asset: 'ship'
+        });
+        this.game.add.existing(this.ship);
         this.shoot = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     }
     update () {
-        if (this.shoot.isDown) {
-            this.weapon.fire(this.game.input.activePointer.position);
-        }
     }
 
 }
