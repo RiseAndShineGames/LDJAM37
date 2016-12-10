@@ -19,7 +19,7 @@ export default class extends Phaser.State {
     }
 
     create () {
-        this.state.start('Interior')
+        this.state.start('Shooter')
     }
 
 }

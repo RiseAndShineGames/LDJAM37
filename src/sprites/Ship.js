@@ -12,12 +12,15 @@ export default class extends Phaser.Sprite {
         // Init variables
         this.game = game
         this.anchor.setTo(0, 0.5)
+        this.scale.set(0.5);
         this.speed = 350
         this.deltaSpeed = 20
         this.currentWeapon = "default"
 
         // Physics and cursors
         this.game.physics.arcade.enable(this)
+        this.body.collideWorldBounds = true;
+        this.body.bounce.setTo(0.5);
         this.cursors = this.game.input.keyboard.addKeys({
             "up": Phaser.KeyCode.W,
             "up_alt": Phaser.KeyCode.UP,
