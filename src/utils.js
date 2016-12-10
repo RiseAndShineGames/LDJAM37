@@ -9,3 +9,7 @@ export const setResponsiveWidth = (sprite, percent, parent) => {
   sprite.width = parent.width / (100 / percent)
   sprite.height = sprite.texture.height - (sprite.texture.height * percentWidth / 100)
 }
+
+export const getRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
