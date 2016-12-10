@@ -14,12 +14,15 @@ export default class extends Phaser.Sprite {
         this.scaleSpeed = 0;
     }
 
-    fire(x, y, angle, speed) {
+    fire(x, y, angle, speed, _gx, _gy) {
+        let gx = _gx || 0;
+        let gy = _gy || 0;
+
         this.reset(x, y);
-        this.scale.set(1);
+        this.scale.set(0.5);
         this.game.physics.arcade.velocityFromAngle(angle, speed, this.body.velocity);
         this.angle = angle;
+        this.body.gravity.set(gx, gy);
     }
 
 }
-
