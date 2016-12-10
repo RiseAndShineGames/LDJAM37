@@ -14,7 +14,7 @@ export default class extends Weapon  {
         if (this.game.time.time < this.nextFire) { return; }
 
         let y = source.position.y;
-        let x = source.position.x + source.width + 10;
+        let x = source.position.x + source.width + 25;
 
         this.getFirstExists(false).fire(x, y, 0, this.bulletSpeed, 0, 0);
 
