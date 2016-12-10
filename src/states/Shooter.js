@@ -13,6 +13,9 @@ export default class extends Phaser.State {
             asset: 'ship'
         });
         this.game.add.existing(this.ship);
+        this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
+            this.state.start('Interior')
+        });
     }
     update () {
     }

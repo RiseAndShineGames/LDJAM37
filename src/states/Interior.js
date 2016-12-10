@@ -12,11 +12,10 @@ export default class extends Phaser.State {
             asset: 'player'
         });
         this.game.add.existing(this.player);
-
-
+        this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
+            this.state.start('Shooter')
+        });
     }
     update () {
-
-
     }
 }
