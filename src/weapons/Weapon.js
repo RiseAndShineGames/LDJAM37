@@ -10,7 +10,7 @@ export default class extends Phaser.Group {
         this.bulletSpeed = 800;
         this.fireRate = 250;
 
-        for (let i = 0; i < 64; i++) {
+        for (let i = 0; i < 128; i++) {
             this.add(new Bullet({ game: game, asset: 'bullet'}), true);
         }
 
