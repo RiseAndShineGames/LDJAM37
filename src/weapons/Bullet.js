@@ -25,4 +25,12 @@ export default class extends Phaser.Sprite {
         this.body.gravity.set(gx, gy);
     }
 
+    update () {
+        if (this.game.pseudoPause) {
+            return;
+        }
+
+    }
+
+
 }

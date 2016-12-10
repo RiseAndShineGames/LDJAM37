@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Ship from '../sprites/Ship';
+import Player from '../sprites/Player';
 
 export default class extends Phaser.State {
     init () {}
@@ -13,8 +14,18 @@ export default class extends Phaser.State {
             asset: 'ship'
         });
         this.game.add.existing(this.ship);
+
+        this.player = new Player({
+            game: this.game,
+            x: this.game.width * 0.5,
+            y: this.game.height * 0.5,
+            asset: 'player'
+        });
+        this.game.add.existing(this.player);
+
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
-            this.state.start('Interior')
+            //this.game.physics.arcade.isPaused = !this.game.physics.arcade.isPaused;
+            this.game.pseudoPause = !this.game.pseudoPause;
         });
     }
     update () {

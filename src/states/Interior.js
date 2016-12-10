@@ -13,7 +13,8 @@ export default class extends Phaser.State {
         });
         this.game.add.existing(this.player);
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
-            this.state.start('Shooter')
+            this.state.stop();
+            this.state.start('Shooter');
         });
     }
     update () {

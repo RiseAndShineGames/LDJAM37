@@ -59,6 +59,11 @@ export default class extends Phaser.Sprite {
     }
 
     update () {
+        if (this.game.pseudoPause) {
+            this.body.velocity.y = 0;
+            return;
+        }
+
         if ((this.cursors.up.isDown || this.cursors.up_alt.isDown) && this.body.velocity.y > this.speed * -1) {
             this.body.velocity.y -= this.deltaSpeed;
         } else if ((this.cursors.down.isDown || this.cursors.down_alt.isDown) && this.body.velocity.y < this.speed) {
