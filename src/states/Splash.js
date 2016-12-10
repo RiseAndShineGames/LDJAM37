@@ -9,16 +9,18 @@ export default class extends Phaser.State {
         this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
         centerGameObjects([this.loaderBg, this.loaderBar])
 
-        this.load.setPreloadSprite(this.loaderBar)
+        this.game.load.setPreloadSprite(this.loaderBar)
         //
         // load your assets
         //
         this.load.image('bullet', 'assets/images/bullet.png')
+        this.load.spritesheet('player', 'assets/images/player.png',32,32,12)
+
 
     }
 
     create () {
-        this.state.start('Shooter')
+        this.state.start('Interior')
     }
 
 }
