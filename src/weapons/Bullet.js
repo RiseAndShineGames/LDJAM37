@@ -27,7 +27,16 @@ export default class extends Phaser.Sprite {
 
     update () {
         if (this.game.pseudoPause) {
+          if(!this.prevVel){
+            this.prevVel = this.body.velocity;
+            this.body.velocity = 0;
+          }
             return;
+        }else{
+          if(this.prevVel){
+            this.body.velocity = this.prevVel;
+            this.prevVel = null;
+          }
         }
 
     }
