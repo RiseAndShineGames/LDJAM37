@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import SingleShot from '../weapons/SingleShot';
 import SpreadShot from '../weapons/SpreadShot';
-import TwinCannons from '../weapons/Shotgun';
+import TwinCannons from '../weapons/TwinCannons';
 import Beam from '../weapons/Beam';
 
 export default class extends Phaser.Sprite {
