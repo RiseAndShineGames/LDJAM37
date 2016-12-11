@@ -31,6 +31,7 @@ export default class extends Phaser.Sprite {
         this.scale.setTo(-this.game.width / this.width * 0.05, this.game.height / this.height * 0.10);
         this.speed = 150
         this.deltaSpeed = 5
+        this.health = 3;
 
         // Physics and cursors
         this.game.physics.arcade.enable(this)
@@ -45,14 +46,12 @@ export default class extends Phaser.Sprite {
             return;
         }
 
-        if (this.x <= 100) {
+        if (this.x <= 100 || this.health <= 0) {
             this.destroy();
             return
         }
 
-        if (this.game.physics.arcade.collide(this.player, this.group, this.shotPlayer, null, this)) {
-            console.log("BOOM");
-        }
+        this.game.physics.arcade.overlap(this.player, this.weapon, this.shotPlayer, null, this);
 
         this.weapon.fire(this);
 
@@ -72,8 +71,8 @@ export default class extends Phaser.Sprite {
 
     }
 
-    shotPlayer (ship, weapon) {
-        console.log(ship, weapon);
+    shotPlayer (ship, bullet) {
+        bullet.destroy();
     }
 
 }

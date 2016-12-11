@@ -6,6 +6,7 @@ export default class extends Phaser.Group {
     constructor ({ game, name }) {
         super(game);
         Phaser.Group.call(this, game, game.world, name, false, true, Phaser.Physics.ARCADE);
+        this.game = game;
         this.nextFire = 0;
         this.bulletSpeed = 800;
         this.fireRate = 250;

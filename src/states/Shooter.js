@@ -7,6 +7,7 @@ export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.shooterGroup = this.game.add.group();
         this.spaceBG = this.game.add.sprite(0,0, "space");
         this.spaceBG.scale.setTo(this.game.width/this.spaceBG.width,this.game.height/this.spaceBG.height);
@@ -31,6 +32,7 @@ export default class extends Phaser.State {
         this.game.add.existing(this.enemy);
         this.enemyGroup.add(this.enemy);
         this.shooterGroup.add(this.enemyGroup);
+        this.ship.addEnemies(this.enemyGroup);
 
         this.interiorGroup = this.game.add.group();
         this.roomBG = this.game.add.sprite(0,0, "room");

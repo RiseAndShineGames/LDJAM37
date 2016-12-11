@@ -58,12 +58,18 @@ export default class extends Phaser.Sprite {
 
     }
 
+    addEnemies(enemies) {
+        this.enemies = enemies;
+    }
+
     update () {
         if (this.game.pseudoPause) {
             this.body.velocity.y = 0;
             this.body.velocity.x = 0;
             return;
         }
+
+        this.game.physics.arcade.overlap(this.enemies, this.weapons[this.currentWeapon], this.shotEnemy, null, this);
 
         if ((this.cursors.up.isDown || this.cursors.up_alt.isDown) && this.body.velocity.y > this.speed * -1) {
             this.body.velocity.y -= this.deltaSpeed;
@@ -82,6 +88,11 @@ export default class extends Phaser.Sprite {
         if (this.cursors.shoot.isDown) {
             this.weapons[this.currentWeapon].fire(this);
         }
+    }
+
+    shotEnemy(enemy, bullet) {
+        enemy.health -= 1;
+        bullet.kill();
     }
 
 }

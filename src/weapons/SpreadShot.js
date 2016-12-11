@@ -19,8 +19,8 @@ export default class extends Weapon  {
         let angle = (this.isEnemy) ? -180 : 0;
 
         this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
-        this.getFirstExists(false).fire(x, y, angle - 30, this.bulletSpeed * 1.1, 0, 200);
-        this.getFirstExists(false).fire(x, y, angle + 30, this.bulletSpeed * 1.1, 0, -200);
+        this.getFirstExists(false).fire(x, y, angle - 30, this.bulletSpeed * 1.1, 0, 400);
+        this.getFirstExists(false).fire(x, y, angle + 30, this.bulletSpeed * 1.1, 0, -400);
 
         this.nextFire = this.game.time.time + this.fireRate;
     }
