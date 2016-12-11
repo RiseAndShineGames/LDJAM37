@@ -46,7 +46,7 @@ export default class extends Phaser.State {
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
 			if(this.game.pseudoPause){
 				this.game.sound.stopAll();
-				this.game.sound.play('TransitionOutOfShip', 1, false);
+				this.game.sound.play('TransitionOutOfShip', 0.5, false);
                 this.game.transitionLayers = false;
                 this.game.time.events.add(1000, () => {
                     this.game.sound.play('ShipFlyingMusic', 1, true);
@@ -54,7 +54,7 @@ export default class extends Phaser.State {
                 }, this);
 			} else {
 				this.game.sound.stopAll();
-				this.game.sound.play('TransitionIntoShip', 1, false);
+				this.game.sound.play('TransitionIntoShip', 0.5, false);
                 this.game.transitionLayers = true;
                 this.game.time.events.add(1000, () => {
                     this.game.sound.play('InsideShipMusic', 1, true);
