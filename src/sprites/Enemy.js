@@ -31,7 +31,8 @@ export default class extends Phaser.Sprite {
         this.scale.setTo(-this.game.width / this.width * 0.05, this.game.height / this.height * 0.10);
         this.speed = 150
         this.deltaSpeed = 5
-        this.health = 3;
+        this.health = 1;
+        this.exists = false;
 
         // Physics and cursors
         this.game.physics.arcade.enable(this)
@@ -44,6 +45,10 @@ export default class extends Phaser.Sprite {
             this.body.velocity.y = 0;
             this.body.velocity.x = 0;
             return;
+        }
+
+        if (!this.exists) {
+            return
         }
 
         if (this.x <= 100 || this.health <= 0) {
@@ -73,6 +78,12 @@ export default class extends Phaser.Sprite {
 
     shotPlayer (ship, bullet) {
         bullet.destroy();
+    }
+    
+    fire(x, y) {
+        this.exists = true;
+        this.x = x;
+        this.y = y;
     }
 
 }
