@@ -4,7 +4,7 @@ import Weapon from './Weapon'
 export default class extends Weapon  {
 
     constructor (game, isEnemy) {
-        super({ game: game, name: "TwinCannons" });
+        super({ game: game, name: "TwinCannons", isEnemy: isEnemy });
         this.game = game;
         this.isEnemy = isEnemy;
         this.distance = 25;
@@ -21,6 +21,10 @@ export default class extends Weapon  {
         this.getFirstExists(false).fire(x, y + this.distance, angle, this.bulletSpeed, 0, 0);
 
         this.nextFire = this.game.time.time + this.fireRate;
+		
+		if (!this.isEnemy) {
+            this.game.sound.play('TwinCannonsSound', 1, false);
+        }
     }
 
 }

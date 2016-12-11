@@ -5,7 +5,7 @@ import { getRandomInt } from '../utils'
 export default class extends Weapon  {
 
     constructor (game, isEnemy) {
-        super({ game: game, name: "Beam" });
+        super({ game: game, name: "Beam", isEnemy: isEnemy });
         this.game = game;
         this.isEnemy = isEnemy;
         this.fireRate = 25;
@@ -21,6 +21,10 @@ export default class extends Weapon  {
         this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
 
         this.nextFire = this.game.time.time + this.fireRate;
+		
+        if (!this.isEnemy) {
+            this.game.sound.play('BeamShotSound', 1, false);
+        }
     }
 
 }

@@ -46,9 +46,21 @@ export default class extends Phaser.State {
         this.game.pickups = this.game.add.group();
         this.interiorGroup.add(this.roomBG);
         this.interiorGroup.add(this.player);
-
+		
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
+			if(this.game.pseudoPause){
+				this.game.sound.stopAll();
+				this.game.sound.play('TransitionOutOfShip', 1, false);
+				this.game.sound.play('ShipFlyingMusic', 1, true);
+			}
+			else{
+				this.game.sound.stopAll();
+				this.game.sound.play('TransitionIntoShip', 1, false);
+				this.game.sound.play('InsideShipMusic', 1, true);
+			}
+			
             this.game.pseudoPause = !this.game.pseudoPause;
+			
             this.ship.weapons[this.ship.currentWeapon].forEachExists((bullet)=>{
                 if(!bullet.exists) {
                     return;
@@ -71,6 +83,8 @@ export default class extends Phaser.State {
             });
 
         });
+		
+		this.game.sound.play('ShipFlyingMusic', 1, true);
     }
     addPickup(){
       this.pickup = new Powerup({"game":this.game,"x":this.game.width,"y": this.game.height,"asset":"pickup","velocity":{"x":-75,"y": -20}});
