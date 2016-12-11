@@ -3,6 +3,7 @@ import SingleShot from '../weapons/SingleShot';
 import SpreadShot from '../weapons/SpreadShot';
 import TwinCannons from '../weapons/TwinCannons';
 import Beam from '../weapons/Beam';
+import Powerup from './Powerup'
 
 export default class extends Phaser.Sprite {
 
@@ -19,7 +20,7 @@ export default class extends Phaser.Sprite {
             case "Beam":
                 this.weapon = new Beam(this.game, true);
                 break;
-            default: 
+            default:
                 this.weapon = new SingleShot(this.game, true);
                 break;
         }
@@ -77,11 +78,34 @@ export default class extends Phaser.Sprite {
         }
 
     }
+    isShot(self,bullet){
+      console.log(self.health);
+      if(self.health ===1){
+        let p = new Powerup(
+          {
+            "game":self.game,
+            "x":self.x,
+            "y":self.y,
+            "asset":"pickup",
+            "velocity":
+              {
+                "x":self.body.velocity.x,
+                "y":self.body.velocity.y
+              }
+            }
+          );
+        this.game.shooterGroup.add(p);
+        
+        //this.game.add.existing(p);
+      }
+      self.health -= 1;
 
+      bullet.kill();
+    }
     shotPlayer (ship, bullet) {
         bullet.destroy();
     }
-    
+
     fire(x, y) {
         this.exists = true;
         this.health = 1;
@@ -97,7 +121,7 @@ export default class extends Phaser.Sprite {
             case "Beam":
                 this.weapon = new Beam(this.game, true);
                 break;
-            default: 
+            default:
                 this.weapon = new SingleShot(this.game, true);
                 break;
         }
@@ -105,4 +129,3 @@ export default class extends Phaser.Sprite {
     }
 
 }
-

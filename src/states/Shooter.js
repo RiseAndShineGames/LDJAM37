@@ -10,7 +10,7 @@ export default class extends Phaser.State {
     create () {
 
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.shooterGroup = this.game.add.group();
+        this.game.shooterGroup = this.game.add.group();
         this.spaceBG = this.game.add.sprite(0,0, "space");
         this.spaceBG.scale.setTo(this.game.width/this.spaceBG.width,this.game.height/this.spaceBG.height);
         this.ship = new Ship({
@@ -23,14 +23,14 @@ export default class extends Phaser.State {
         // this.game.timerSpawnPowerup.loop(Phaser.Timer.SECOND *3,this.addPickup, this);
         // console.log(this.game);
         // this.game.timerSpawnPowerup.start();
-        this.shooterGroup.add(this.spaceBG);
-        this.shooterGroup.add(this.ship);
+        this.game.shooterGroup.add(this.spaceBG);
+        this.game.shooterGroup.add(this.ship);
 
         this.enemyGroup = new EnemyGroup({
             game: this.game,
             player: this.ship
         });
-        this.shooterGroup.add(this.enemyGroup);
+        this.game.shooterGroup.add(this.enemyGroup);
         this.ship.addEnemies(this.enemyGroup);
 
         this.interiorGroup = this.game.add.group();
@@ -80,10 +80,10 @@ export default class extends Phaser.State {
     update () {
         if (this.game.pseudoPause) {
             this.interiorGroup.z = 200;
-            this.shooterGroup.z = 100;
+            this.game.shooterGroup.z = 100;
         } else {
             this.interiorGroup.z = 100;
-            this.shooterGroup.z = 200;
+            this.game.shooterGroup.z = 200;
             this.enemyGroup.fire();
             Object.values(this.ship.weapons).forEach((weapon) => {
                 weapon.z = 220;

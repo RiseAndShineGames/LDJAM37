@@ -3,6 +3,7 @@ import SingleShot from '../weapons/SingleShot';
 import SpreadShot from '../weapons/SpreadShot';
 import TwinCannons from '../weapons/TwinCannons';
 import Beam from '../weapons/Beam';
+import Enemy from '../sprites/Enemy'
 
 export default class extends Phaser.Sprite {
 
@@ -87,7 +88,9 @@ export default class extends Phaser.Sprite {
         }
       });
     }
-
+    applyShot(enemy, bullet){
+      enemy.isShot(enemy,bullet);
+    }
     addEnemies(enemies) {
         this.enemies = enemies;
     }
@@ -98,8 +101,7 @@ export default class extends Phaser.Sprite {
             this.body.velocity.x = 0;
             return;
         }
-
-        this.game.physics.arcade.overlap(this.enemies, this.weapons[this.currentWeapon], this.shotEnemy, null, this);
+        this.game.physics.arcade.overlap(this.enemies, this.weapons[this.currentWeapon], this.applyShot, null);
 
         if ((this.cursors.up.isDown || this.cursors.up_alt.isDown) && this.body.velocity.y > this.speed * -1) {
             this.body.velocity.y -= this.deltaSpeed;
