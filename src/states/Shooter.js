@@ -5,21 +5,7 @@ import EnemyGroup from '../sprites/EnemyGroup';
 
 export default class extends Phaser.State {
     init () {}
-    preload () {
-		var transitionIntoShipSound = "assets/audio/music/TransitionIntoShipDraft.mp3";
-		var transitionOutOfShipSound = "assets/audio/music/TransitionOutOfShipDraft.mp3";
-		var shipFlyingSong = "assets/audio/music/ShipFlyingSong-Looped.mp3";
-		var insideShipSong = "assets/audio/music/InsideShipLoop-Draft.mp3";
-		var singleShotSound = "assets/audio/sfx/SFX-RightGunSound.mp3";
-		var twinCannonsSound = "assets/audio/sfx/SFX-GunsTogetherSound.mp3";
-		
-		this.game.load.audio('InsideShipMusic', insideShipSong);
-		this.game.load.audio('ShipFlyingMusic', shipFlyingSong);
-		this.game.load.audio('TransitionIntoShip', transitionIntoShipSound);
-		this.game.load.audio('TransitionOutOfShip', transitionOutOfShipSound);
-		this.game.load.audio('SingleShotSound', singleShotSound);
-		this.game.load.audio('TwinCannonsSound', twinCannonsSound);
-	}
+    preload () {}
     create () {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.shooterGroup = this.game.add.group();
