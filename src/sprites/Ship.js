@@ -131,7 +131,6 @@ export default class extends Phaser.Sprite {
         }
         this.game.physics.arcade.overlap(this, this.game.pickups,this.pickupPowerup,null,this);
     }
-
     shotEnemy(enemy, bullet) {
         enemy.health -= 1;
         bullet.kill();

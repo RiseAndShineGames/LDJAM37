@@ -94,8 +94,8 @@ export default class extends Phaser.Sprite {
               }
             }
           );
-        this.game.shooterGroup.add(p);
-        
+        this.game.pickups.add(p);
+
         //this.game.add.existing(p);
       }
       self.health -= 1;
