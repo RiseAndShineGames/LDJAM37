@@ -24,8 +24,33 @@ export default class extends Phaser.State {
         this.game.add.existing(this.player);
 
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
-            //this.game.physics.arcade.isPaused = !this.game.physics.arcade.isPaused;
             this.game.pseudoPause = !this.game.pseudoPause;
+            this.ship.weapons[this.ship.currentWeapon].children.forEach((bullet)=>{
+              if(!bullet.exists) {
+                return;
+              };
+              if(this.game.pseudoPause){
+                bullet.prevVel= {};
+                bullet.prevVel.x = bullet.body.velocity.x;
+                bullet.prevVel.y = bullet.body.velocity.y;
+                bullet.prevG = {"x":bullet.body.gravity.x,"y":bullet.body.gravity.y};
+                bullet.body.velocity.x = 0;
+                bullet.body.velocity.y = 0;
+                bullet.body.gravity.set(0,0);
+              }else{
+                bullet.body.velocity.x = bullet.prevVel.x;
+                bullet.body.velocity.y = bullet.prevVel.y;
+                bullet.body.gravity.set(bullet.prevG.x,bullet.prevG.y);
+                bullet.prevG = null;
+                bullet.prevVel = null;
+              }
+            });
+
+            //console.log(this.ship.weapons[this.ship.currentWeapon].children);
+
+
+            //this.game.physics.arcade.isPaused = !this.game.physics.arcade.isPaused;
+
         });
     }
     update () {
