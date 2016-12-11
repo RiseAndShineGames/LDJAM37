@@ -1,11 +1,13 @@
 import Phaser from 'phaser';
 import Ship from '../sprites/Ship';
 import Player from '../sprites/Player';
+import Powerup from '../sprites/Powerup';
 
 export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
+
         this.bg = this.game.add.sprite(0,0, "space");
         this.bg.scale.setTo(this.game.width/this.bg.width,this.game.height/this.bg.height);
         this.ship = new Ship({
@@ -15,7 +17,9 @@ export default class extends Phaser.State {
             asset: 'ship'
         });
         this.game.add.existing(this.ship);
-
+        // this.game.timerSpawnPowerup.loop(Phaser.Timer.SECOND *3,this.addPickup, this);
+        // console.log(this.game);
+        // this.game.timerSpawnPowerup.start();
         this.player = new Player({
             game: this.game,
             x: this.game.width * 0.5,
@@ -23,7 +27,7 @@ export default class extends Phaser.State {
             asset: 'player'
         });
         this.game.add.existing(this.player);
-
+        this.game.pickups = this.game.add.group();
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
             this.game.pseudoPause = !this.game.pseudoPause;
             this.ship.weapons[this.ship.currentWeapon].children.forEach((bullet)=>{
@@ -53,6 +57,11 @@ export default class extends Phaser.State {
             //this.game.physics.arcade.isPaused = !this.game.physics.arcade.isPaused;
 
         });
+    }
+    addPickup(){
+      this.pickup = new Powerup({"game":this.game,"x":this.game.width,"y": this.game.height,"asset":"pickup","velocity":{"x":-75,"y": -20}});
+      this.game.add.existing(this.pickup);
+      this.game.pickups.add(this.pickup);
     }
     update () {
     }

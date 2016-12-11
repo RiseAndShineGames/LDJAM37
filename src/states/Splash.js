@@ -8,6 +8,7 @@ export default class extends Phaser.State {
         this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg')
         this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
         centerGameObjects([this.loaderBg, this.loaderBar])
+          //  this.game.timerSpawnPowerup = new Phaser.Timer(game.false);
 
         this.game.load.setPreloadSprite(this.loaderBar)
         //
@@ -17,7 +18,8 @@ export default class extends Phaser.State {
         this.load.spritesheet('player', 'assets/images/player.png',32,32,12)
         this.load.image('ship', 'assets/images/ship.png')
         this.load.image('space', 'assets/images/space.png')
-        this.load.image('room', 'assets/images/room.png')
+        this.load.image('pickup', 'assets/images/energy.png')
+        this.load.image('module', 'assets/images/energycartridge.png')
     }
 
     create () {
