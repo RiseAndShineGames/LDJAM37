@@ -63,7 +63,7 @@ export default class extends Phaser.Sprite {
 
     }
     pickupPowerup(ship, powerup){
-
+      this.game.newPowerup = true;
       powerup.destroy();
       this.game.pseudoPause = !this.game.pseudoPause;
       ship.weapons[ship.currentWeapon].children.forEach((bullet)=>{

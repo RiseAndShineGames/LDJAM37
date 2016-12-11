@@ -20,6 +20,11 @@ export default class extends Phaser.State {
         });
     }
     update () {
+      if(this.game.newPowerup){
+        this.game.newPowerup = false;
+        console.log("spawn catridge");
+
+      }
 
 
     }
