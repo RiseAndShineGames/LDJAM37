@@ -37,6 +37,8 @@ export default class extends Phaser.Sprite {
 
     update () {
         if (!this.game.pseudoPause) {
+            this.body.velocity.set(0);
+            this.animations.stop();
             return;
         }
 
