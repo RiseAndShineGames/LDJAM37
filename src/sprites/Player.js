@@ -9,6 +9,7 @@ export default class extends Phaser.Sprite {
         this.anchor.setTo(0.5);
         this.game.physics.arcade.enable(this);
         this.movespeed = 100;
+        this.scale.setTo(this.game.width / this.width * 0.15, this.game.height / this.height * 0.15);
 
         this.animations.add('idle-up', [0],10,true);
         this.animations.add('walk-up', [1,2],5,true);
