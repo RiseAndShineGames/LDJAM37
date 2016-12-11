@@ -4,7 +4,7 @@ import Weapon from './Weapon'
 export default class extends Weapon  {
 
     constructor (game, isEnemy) {
-        super({ game: game, name: "TwinCannons" });
+        super({ game: game, name: "TwinCannons", isEnemy: isEnemy });
         this.game = game;
         this.isEnemy = isEnemy;
         this.distance = 25;

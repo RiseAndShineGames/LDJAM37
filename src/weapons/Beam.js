@@ -5,7 +5,7 @@ import { getRandomInt } from '../utils'
 export default class extends Weapon  {
 
     constructor (game, isEnemy) {
-        super({ game: game, name: "Beam" });
+        super({ game: game, name: "Beam", isEnemy: isEnemy });
         this.game = game;
         this.isEnemy = isEnemy;
         this.fireRate = 25;
