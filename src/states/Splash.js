@@ -24,8 +24,8 @@ export default class extends Phaser.State {
         this.load.image('module', 'assets/images/energycartridge.png')
         this.load.image('room', 'assets/images/room.png')
 
-		let transitionIntoShipSound = "assets/audio/music/TransitionIntoShipDraft.mp3";
-		let transitionOutOfShipSound = "assets/audio/music/TransitionOutOfShipDraft.mp3";
+		let transitionIntoShipSound = "assets/audio/sfx/SFX-TransitionIntoShip-Shortened.mp3";
+		let transitionOutOfShipSound = "assets/audio/sfx/SFX-TransitionOutOfShip-Shortened.mp3";
 		let shipFlyingSong = "assets/audio/music/ShipFlyingSong-Looped.mp3";
 		let insideShipSong = "assets/audio/music/InsideShipLoop-Draft.mp3";
 		let singleShotSound = "assets/audio/sfx/SFX-RightGunSound.mp3";
