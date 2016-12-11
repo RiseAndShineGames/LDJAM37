@@ -12,7 +12,7 @@ export default class extends Phaser.Sprite {
         // Init variables
         this.game = game
         this.anchor.setTo(0, 0.5)
-        this.scale.set(0.5);
+        this.scale.setTo(this.game.width / this.width * 0.15, this.game.height / this.height * 0.25);
         this.speed = 350
         this.deltaSpeed = 20
         this.currentWeapon = "default"
