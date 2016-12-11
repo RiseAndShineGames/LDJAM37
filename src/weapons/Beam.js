@@ -4,9 +4,10 @@ import { getRandomInt } from '../utils'
 
 export default class extends Weapon  {
 
-    constructor (game) {
+    constructor (game, isEnemy) {
         super({ game: game, name: "Beam" });
         this.game = game;
+        this.isEnemy = isEnemy;
         this.fireRate = 25;
     }
 
@@ -14,9 +15,10 @@ export default class extends Weapon  {
         if (this.game.time.time < this.nextFire) { return; }
 
         let y = source.position.y;
-        let x = source.position.x + source.width + 25;
+        let x = (this.isEnemy) ? source.position.x + source.width - 25: source.position.x + source.width + 25;
+        let angle = (this.isEnemy) ? -180 : 0;
 
-        this.getFirstExists(false).fire(x, y, 0, this.bulletSpeed, 0, 0);
+        this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
 
         this.nextFire = this.game.time.time + this.fireRate;
     }

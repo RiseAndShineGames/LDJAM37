@@ -10,7 +10,7 @@ export default class extends Phaser.Sprite {
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;
         this.exists = false;
-        this.tracking = false;
+        this.tracking = true;
         this.scaleSpeed = 0;
     }
 
@@ -18,9 +18,8 @@ export default class extends Phaser.Sprite {
         let gx = _gx || 0;
         let gy = _gy || 0;
         this.reset(x, y);
-        this.scale.set(0.5);
+        this.scale.set(0.25);
         this.game.physics.arcade.velocityFromAngle(angle, speed, this.body.velocity);
-        this.angle = angle;
         this.body.gravity.set(gx, gy);
     }
 
@@ -48,7 +47,7 @@ export default class extends Phaser.Sprite {
             this.prevVel = null;
           }
         }
-
+        this.angle = Math.atan2(this.body.velocity.y, this.body.velocity.x) * (180 / Math.PI);
     }
 
 
