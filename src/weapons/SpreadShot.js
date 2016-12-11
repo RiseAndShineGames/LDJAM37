@@ -23,6 +23,8 @@ export default class extends Weapon  {
         this.getFirstExists(false).fire(x, y, angle + 30, this.bulletSpeed * 1.1, 0, -400);
 
         this.nextFire = this.game.time.time + this.fireRate;
+		
+		this.game.sound.play('SpreadShotSound', 1, false);
     }
 
 }
