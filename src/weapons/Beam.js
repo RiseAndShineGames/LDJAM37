@@ -23,7 +23,7 @@ export default class extends Weapon  {
         this.nextFire = this.game.time.time + this.fireRate;
 		
         if (!this.isEnemy) {
-            this.game.sound.play('BeamShotSound', 1, false);
+            this.game.sound.play('BeamShotSound', 0.8, false);
         }
     }
 
