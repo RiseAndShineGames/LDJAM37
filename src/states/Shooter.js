@@ -6,6 +6,7 @@ export default class extends Phaser.State {
     init () {}
     preload () {}
     create () {
+        this.shooterGroup = this.game.add.group();
         this.spaceBG = this.game.add.sprite(0,0, "space");
         this.spaceBG.scale.setTo(this.game.width/this.spaceBG.width,this.game.height/this.spaceBG.height);
         this.ship = new Ship({
@@ -15,7 +16,10 @@ export default class extends Phaser.State {
             asset: 'ship'
         });
         this.game.add.existing(this.ship);
+        this.shooterGroup.add(this.spaceBG);
+        this.shooterGroup.add(this.ship);
 
+        this.interiorGroup = this.game.add.group();
         this.roomBG = this.game.add.sprite(0,0, "room");
         this.roomBG.scale.setTo(this.game.width/this.roomBG.width,this.game.height/this.roomBG.height);
         this.player = new Player({
@@ -25,10 +29,12 @@ export default class extends Phaser.State {
             asset: 'player'
         });
         this.game.add.existing(this.player);
+        this.interiorGroup.add(this.roomBG);
+        this.interiorGroup.add(this.player);
 
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
             this.game.pseudoPause = !this.game.pseudoPause;
-            this.ship.weapons[this.ship.currentWeapon].children.forEach((bullet)=>{
+            this.ship.weapons[this.ship.currentWeapon].forEachExists((bullet)=>{
                 if(!bullet.exists) {
                     return;
                 };
@@ -53,16 +59,14 @@ export default class extends Phaser.State {
     }
     update () {
         if (this.game.pseudoPause) {
-            this.spaceBG.z = 100;
-            this.ship.z = 120;
-            this.roomBG.z = 200;
-            this.player.z = 220;
+            this.interiorGroup.z = 200;
+            this.shooterGroup.z = 100;
         } else {
-            this.spaceBG.z = 200;
-            this.ship.z = 220;
-            this.ship.weapons[this.ship.currentWeapon].z = 220;
-            this.roomBG.z = 100;
-            this.player.z = 120;
+            this.interiorGroup.z = 100;
+            this.shooterGroup.z = 200;
+            Object.values(this.ship.weapons).forEach((weapon) => {
+                weapon.z = 220;
+            });
         }
         this.game.world.sort();
     }
