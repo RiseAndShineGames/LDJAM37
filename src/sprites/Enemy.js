@@ -24,6 +24,7 @@ export default class extends Phaser.Sprite {
                 break;
         }
         this.weapon.fireRate *= 1.75
+        this.weaponName = weapon;
 
         // Init variables
         this.game = game
@@ -47,12 +48,13 @@ export default class extends Phaser.Sprite {
             return;
         }
 
-        if (!this.exists) {
+        if (this.x <= 100 || this.health <= 0) {
+            this.weapon = null;
+            this.exists = false;
             return
         }
 
-        if (this.x <= 100 || this.health <= 0) {
-            this.destroy();
+        if (!this.exists) {
             return
         }
 
@@ -82,8 +84,24 @@ export default class extends Phaser.Sprite {
     
     fire(x, y) {
         this.exists = true;
+        this.health = 1;
         this.x = x;
         this.y = y;
+        switch (this.weaponName) {
+            case "SpreadShot":
+                this.weapon = new SpreadShot(this.game, true);
+                break;
+            case "TwinCannons":
+                this.weapon = new TwinCannons(this.game, true);
+                break;
+            case "Beam":
+                this.weapon = new Beam(this.game, true);
+                break;
+            default: 
+                this.weapon = new SingleShot(this.game, true);
+                break;
+        }
+        this.weapon.fireRate *= 1.75
     }
 
 }
