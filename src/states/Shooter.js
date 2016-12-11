@@ -5,7 +5,21 @@ import EnemyGroup from '../sprites/EnemyGroup';
 
 export default class extends Phaser.State {
     init () {}
-    preload () {}
+    preload () {
+		var transitionIntoShipSound = "assets/audio/music/TransitionIntoShipDraft.mp3";
+		var transitionOutOfShipSound = "assets/audio/music/TransitionOutOfShipDraft.mp3";
+		var shipFlyingSong = "assets/audio/music/ShipFlyingSong-Looped.mp3";
+		var insideShipSong = "assets/audio/music/InsideShipLoop-Draft.mp3";
+		var singleShotSound = "assets/audio/sfx/SFX-RightGunSound.mp3";
+		var twinCannonsSound = "assets/audio/sfx/SFX-GunsTogetherSound.mp3";
+		
+		this.game.load.audio('InsideShipMusic', insideShipSong);
+		this.game.load.audio('ShipFlyingMusic', shipFlyingSong);
+		this.game.load.audio('TransitionIntoShip', transitionIntoShipSound);
+		this.game.load.audio('TransitionOutOfShip', transitionOutOfShipSound);
+		this.game.load.audio('SingleShotSound', singleShotSound);
+		this.game.load.audio('TwinCannonsSound', twinCannonsSound);
+	}
     create () {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.shooterGroup = this.game.add.group();
@@ -40,9 +54,21 @@ export default class extends Phaser.State {
         this.game.add.existing(this.player);
         this.interiorGroup.add(this.roomBG);
         this.interiorGroup.add(this.player);
-
+		
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
+			if(this.game.pseudoPause){
+				this.game.sound.stopAll();
+				this.game.sound.play('TransitionOutOfShip', 1, false);
+				this.game.sound.play('ShipFlyingMusic', 1, true);
+			}
+			else{
+				this.game.sound.stopAll();
+				this.game.sound.play('TransitionIntoShip', 1, false);
+				this.game.sound.play('InsideShipMusic', 1, true);
+			}
+			
             this.game.pseudoPause = !this.game.pseudoPause;
+			
             this.ship.weapons[this.ship.currentWeapon].forEachExists((bullet)=>{
                 if(!bullet.exists) {
                     return;
@@ -65,6 +91,8 @@ export default class extends Phaser.State {
             });
 
         });
+		
+		this.game.sound.play('ShipFlyingMusic', 1, true);
     }
     update () {
         if (this.game.pseudoPause) {

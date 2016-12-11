@@ -21,6 +21,8 @@ export default class extends Weapon  {
         this.getFirstExists(false).fire(x, y + this.distance, angle, this.bulletSpeed, 0, 0);
 
         this.nextFire = this.game.time.time + this.fireRate;
+		
+		this.game.sound.play('TwinCannonsSound', 1, false);
     }
 
 }
