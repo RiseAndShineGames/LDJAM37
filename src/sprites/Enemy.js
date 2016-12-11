@@ -49,9 +49,11 @@ export default class extends Phaser.Sprite {
             return;
         }
 
+        this.body.velocity.x = -125;
         if (this.x <= 100 || this.health <= 0) {
             this.weapon = null;
             this.exists = false;
+
             return
         }
 
@@ -95,7 +97,7 @@ export default class extends Phaser.Sprite {
             }
           );
         this.game.shooterGroup.add(p);
-        
+
         //this.game.add.existing(p);
       }
       self.health -= 1;

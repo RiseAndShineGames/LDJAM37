@@ -9,6 +9,8 @@ export default class extends Phaser.State {
     preload () {}
     create () {
 
+        this.game.pseudoPause = true;
+        this.game.transitionLayers = true;
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.game.shooterGroup = this.game.add.group();
         this.spaceBG = this.game.add.sprite(0,0, "space");
@@ -46,21 +48,27 @@ export default class extends Phaser.State {
         this.game.pickups = this.game.add.group();
         this.interiorGroup.add(this.roomBG);
         this.interiorGroup.add(this.player);
-		
+
         this.game.input.keyboard.addKey(Phaser.KeyCode.K).onDown.add(() => {
 			if(this.game.pseudoPause){
 				this.game.sound.stopAll();
 				this.game.sound.play('TransitionOutOfShip', 1, false);
-				this.game.sound.play('ShipFlyingMusic', 1, true);
-			}
-			else{
+                this.game.transitionLayers = false;
+                this.game.time.events.add(1000, () => {
+                    this.game.sound.play('ShipFlyingMusic', 1, true);
+                    this.game.pseudoPause = false;
+                }, this);
+			} else {
 				this.game.sound.stopAll();
 				this.game.sound.play('TransitionIntoShip', 1, false);
-				this.game.sound.play('InsideShipMusic', 1, true);
+                this.game.transitionLayers = true;
+                this.game.time.events.add(1000, () => {
+                    this.game.sound.play('InsideShipMusic', 1, true);
+                    this.game.pseudoPause = true;
+                }, this);
 			}
-			
-            this.game.pseudoPause = !this.game.pseudoPause;
-			
+
+
             this.ship.weapons[this.ship.currentWeapon].forEachExists((bullet)=>{
                 if(!bullet.exists) {
                     return;
@@ -83,8 +91,8 @@ export default class extends Phaser.State {
             });
 
         });
-		
-		this.game.sound.play('ShipFlyingMusic', 1, true);
+
+		this.game.sound.play('InsideShipMusic', 1, true);
     }
     addPickup(){
       this.pickup = new Powerup({"game":this.game,"x":this.game.width,"y": this.game.height,"asset":"pickup","velocity":{"x":-75,"y": -20}});
@@ -92,12 +100,14 @@ export default class extends Phaser.State {
       this.game.pickups.add(this.pickup);
     }
     update () {
-        if (this.game.pseudoPause) {
+        if (this.game.transitionLayers) {
             this.interiorGroup.z = 200;
             this.game.shooterGroup.z = 100;
         } else {
             this.interiorGroup.z = 100;
+
             this.game.shooterGroup.z = 200;
+            this.enemyGroup.z = 200;
             this.enemyGroup.fire();
             Object.values(this.ship.weapons).forEach((weapon) => {
                 weapon.z = 220;
