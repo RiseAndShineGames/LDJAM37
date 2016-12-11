@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Ship from '../sprites/Ship';
-import Enemy from '../sprites/Enemy';
 import Player from '../sprites/Player';
+import EnemyGroup from '../sprites/EnemyGroup';
 
 export default class extends Phaser.State {
     init () {}
@@ -21,16 +21,10 @@ export default class extends Phaser.State {
         this.shooterGroup.add(this.spaceBG);
         this.shooterGroup.add(this.ship);
 
-        this.enemyGroup = this.game.add.group();
-        this.enemy = new Enemy({
+        this.enemyGroup = new EnemyGroup({
             game: this.game,
-            player: this.ship,
-            x: this.game.width - 100,
-            y: this.game.height * 0.5,
-            weapon: null
+            player: this.ship
         });
-        this.game.add.existing(this.enemy);
-        this.enemyGroup.add(this.enemy);
         this.shooterGroup.add(this.enemyGroup);
         this.ship.addEnemies(this.enemyGroup);
 
@@ -79,10 +73,13 @@ export default class extends Phaser.State {
         } else {
             this.interiorGroup.z = 100;
             this.shooterGroup.z = 200;
+            this.enemyGroup.fire();
             Object.values(this.ship.weapons).forEach((weapon) => {
                 weapon.z = 220;
             });
-            this.enemy.weapon.z = 220;
+            this.enemyGroup.forEachExists((enemy) => {
+                enemy.weapon.z = 220;
+            });
         }
         this.game.world.sort();
     }
