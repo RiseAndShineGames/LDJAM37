@@ -32,6 +32,7 @@ export default class extends Phaser.State {
 		let twinCannonsSound = "assets/audio/sfx/SFX-GunsTogetherSound.mp3";
 		let beamShotSound = "assets/audio/sfx/SFX-BeamWeapon-Draft.mp3";
 		let spreadShotSound = "assets/audio/sfx/SFX-TripleShotWeapon-Draft.mp3";
+		let enemyDeathSound = "assets/audio/sfx/SFX-EnemyDeath.mp3";
 
 		this.game.load.audio('InsideShipMusic', insideShipSong);
 		this.game.load.audio('ShipFlyingMusic', shipFlyingSong);
@@ -40,7 +41,8 @@ export default class extends Phaser.State {
 		this.game.load.audio('SingleShotSound', singleShotSound);
 		this.game.load.audio('TwinCannonsSound', twinCannonsSound);
 		this.game.load.audio('BeamShotSound', beamShotSound);
-		this.game.load.audio('SpreadShotSound', spreadShotSound);
+		this.game.load.audio('SpreadShotSound', spreadShotSound);		
+		this.game.load.audio('EnemyDeath', enemyDeathSound);
     }
 
     create () {

@@ -58,6 +58,7 @@ export default class extends Phaser.Sprite {
         }
 
         if (!this.exists) {
+			this.game.sound.play('EnemyDeath', 1, false);
             return
         }
 
